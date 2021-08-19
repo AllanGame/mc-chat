@@ -41,7 +41,6 @@
           case KEYUP_CODE:
             event.preventDefault();
             messageView++;
-            addMessage("[DEBUG] messageView: " + messageView);
             if (messageView > userMessages.length) {
               messageView = userMessages.length;
             }
