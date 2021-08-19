@@ -27,8 +27,6 @@
     </div>
 
     <script>
-      let username = prompt("What's your nickname?");
-
       const userMessages = [];
       let messageView = -1;
       const textArea = document.getElementById("input");
@@ -58,19 +56,7 @@
             event.preventDefault();
             if (textArea.value.trim().length === 0) return;
 
-            if (textArea.value.startsWith("/nick")) {
-              let newUsername = textArea.value.trim().split(" ");
-              if (newUsername.length < 2) {
-                return;
-              }
-
-              username = newUsername[1];
-              addMessage("Your new username is &8" + username);
-              userMessages.unshift(textArea.value);
-              return;
-            }
-
-            addMessage(`<${username}> ` + textArea.value);
+            addMessage(textArea.value);
             userMessages.unshift(textArea.value);
             messageView = -1;
             textArea.value = "";
