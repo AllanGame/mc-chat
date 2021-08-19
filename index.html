@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="mcformat.min.css" />
+    <script src="mcformat.min.js"></script>
+
+    <title>MCFormat test</title>
+  </head>
+  <body>
+    <div class="game">
+      <div class="chat">
+        <div class="messages"></div>
+        <div class="input">
+          <textarea
+            name="input"
+            id="input"
+            cols="70"
+            rows="1"
+            spellcheck="false"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let username = prompt("What's your nickname?");
+
+      const userMessages = [];
+      let messageView = -1;
+      const textArea = document.getElementById("input");
+      textArea.addEventListener("keydown", (event) => {
+        const KEYUP_CODE = 38;
+        const KEYDOWN_CODE = 40;
+        const ENTER_KEY_CODE = 13;
+
+        switch (event.keyCode) {
+          case KEYUP_CODE:
+            event.preventDefault();
+            messageView++;
+            addMessage("[DEBUG] messageView: " + messageView);
+            if (messageView > userMessages.length) {
+              messageView = userMessages.length;
+            }
+            textArea.value = userMessages[messageView] || "";
+            break;
+          case KEYDOWN_CODE:
+            event.preventDefault();
+            messageView--;
+            if (messageView < 0) {
+              messageView = 0;
+            }
+            textArea.value = userMessages[messageView] || "";
+            break;
+          case ENTER_KEY_CODE:
+            event.preventDefault();
+            if (textArea.value.trim().length === 0) return;
+
+            if (textArea.value.startsWith("/nick")) {
+              let newUsername = textArea.value.trim().split(" ");
+              if (newUsername.length < 2) {
+                return;
+              }
+
+              username = newUsername[1];
+              addMessage("Your new username is &8" + username);
+              userMessages.unshift(textArea.value);
+              return;
+            }
+
+            addMessage(`<${username}> ` + textArea.value);
+            userMessages.unshift(textArea.value);
+            messageView = -1;
+            textArea.value = "";
+            break;
+        }
+      });
+
+      function addMessage(message) {
+        const formater = new MCFormat("&");
+        let messageElement = formater.format(message);
+        let messages = document.getElementsByClassName("messages")[0];
+        messages.appendChild(messageElement);
+
+        const breakLine = document.createElement("br");
+        messages.appendChild(breakLine);
+      }
+    </script>
+  </body>
+</html>

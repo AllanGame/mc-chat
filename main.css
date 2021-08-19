@@ -1,0 +1,62 @@
+@font-face {
+  font-family: minecraft-regular;
+  src: url(font/minecraft-regular.woff) format("woff");
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+.game {
+  /* background-image: url("./game.png"); */
+  width: 100%;
+  height: 100%;
+  background-image: url("./game.png");
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.messages {
+  width: 50%;
+  position: fixed;
+  margin-bottom: 100px;
+  bottom: 0;
+  color: white;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.messages > span {
+  margin: 5px;
+}
+
+.messages > span::selection {
+  background: none;
+}
+
+.input > textarea {
+  padding-left: 8px;
+  font-family: minecraft-regular;
+  font-size: 20px;
+  height: 20px;
+  width: 100%;
+  margin-left: 5px;
+  margin-bottom: 2px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.35);
+  border: none;
+  overflow: hidden;
+  outline: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  resize: none;
+}
